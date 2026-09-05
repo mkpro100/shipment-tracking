@@ -17,13 +17,15 @@
       font-family: Arial, sans-serif;
       background: #f4f7fb;
       color: #172033;
+      min-height: 100vh;
     }
 
+    /* HEADER */
     .header {
       background: #102a43;
       color: white;
-      text-align: center;
       padding: 30px 20px;
+      text-align: center;
     }
 
     .header h1 {
@@ -33,108 +35,211 @@
 
     .header p {
       color: #d9e2ec;
+      font-size: 16px;
     }
 
+    /* MAIN CONTAINER */
     .container {
-      max-width: 800px;
-      margin: 40px auto;
-      padding: 20px;
+      max-width: 850px;
+      margin: 30px auto;
+      padding: 0 20px 40px;
+    }
+
+    /* SEARCH BOX */
+    .search-card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      margin-bottom: 25px;
+    }
+
+    .search-card h2 {
+      margin-bottom: 15px;
+      font-size: 22px;
     }
 
     .search-box {
-      background: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    }
-
-    .search-box h2 {
-      margin-bottom: 15px;
-    }
-
-    .search-row {
       display: flex;
       gap: 10px;
     }
 
-    input {
+    .search-box input {
       flex: 1;
       padding: 15px;
-      border: 1px solid #ccd6dd;
+      border: 1px solid #cbd5e0;
       border-radius: 8px;
       font-size: 16px;
+      outline: none;
     }
 
-    button {
+    .search-box input:focus {
+      border-color: #1f7a8c;
+    }
+
+    .search-box button {
       background: #1f7a8c;
       color: white;
       border: none;
       padding: 15px 25px;
       border-radius: 8px;
       font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
     }
 
-    button:hover {
+    .search-box button:hover {
       background: #155d6b;
     }
 
-    .result {
-      display: none;
+    /* TRACKING RESULT */
+    .tracking-card {
       background: white;
-      margin-top: 25px;
+      border-radius: 12px;
       padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+      display: none;
     }
 
-    .status {
-      display: inline-block;
-      background: #e6f7ee;
-      color: #18794e;
-      padding: 8px 15px;
-      border-radius: 20px;
-      font-weight: bold;
-      margin: 15px 0;
+    .tracking-number {
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e2e8f0;
+      margin-bottom: 25px;
     }
 
-    .details {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin-top: 15px;
-    }
-
-    .card {
-      background: #f4f7fb;
-      padding: 15px;
-      border-radius: 10px;
-    }
-
-    .card strong {
-      display: block;
-      color: #52606d;
+    .tracking-number p {
+      color: #718096;
       margin-bottom: 7px;
     }
 
+    .tracking-number h2 {
+      color: #102a43;
+      font-size: 22px;
+      word-break: break-all;
+    }
+
+    /* STATUS */
+    .status-box {
+      background: #e6fffa;
+      border-left: 5px solid #38a169;
+      padding: 18px;
+      border-radius: 8px;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .status-box h3 {
+      color: #276749;
+      font-size: 22px;
+      margin-bottom: 5px;
+    }
+
+    .status-box p {
+      color: #4a5568;
+    }
+
+    /* INFORMATION GRID */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .info-box {
+      background: #f7fafc;
+      padding: 18px;
+      border-radius: 8px;
+      border: 1px solid #edf2f7;
+    }
+
+    .info-box span {
+      display: block;
+      color: #718096;
+      font-size: 13px;
+      margin-bottom: 7px;
+    }
+
+    .info-box strong {
+      color: #172033;
+      font-size: 16px;
+    }
+
+    /* TIMELINE */
+    .timeline-title {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .timeline {
+      position: relative;
+      margin-left: 10px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 35px;
+      padding-bottom: 30px;
+      border-left: 2px solid #cbd5e0;
+    }
+
+    .timeline-item:last-child {
+      border-left: none;
+      padding-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -9px;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      background: #1f7a8c;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px #1f7a8c;
+    }
+
+    .timeline-content h4 {
+      font-size: 16px;
+      margin-bottom: 5px;
+      color: #102a43;
+    }
+
+    .timeline-content p {
+      color: #718096;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* MESSAGE */
     .message {
+      text-align: center;
       margin-top: 15px;
-      text-align: center;
-      color: #d64545;
+      color: #e53e3e;
+      display: none;
     }
 
-    .footer {
+    /* FOOTER */
+    footer {
       text-align: center;
-      padding: 30px;
-      color: #627d98;
+      color: #718096;
+      padding: 25px;
+      font-size: 14px;
     }
 
+    /* MOBILE */
     @media (max-width: 600px) {
-      .search-row {
+      .search-box {
         flex-direction: column;
       }
 
-      .details {
+      .search-box button {
+        width: 100%;
+      }
+
+      .info-grid {
         grid-template-columns: 1fr;
       }
 
@@ -147,17 +252,20 @@
 
 <body>
 
+  <!-- HEADER -->
   <div class="header">
     <h1>📦 Shipment Tracking</h1>
     <p>Track your shipment quickly and easily</p>
   </div>
 
+
   <div class="container">
 
-    <div class="search-box">
-      <h2>Track Your Shipment</h2>
+    <!-- SEARCH -->
+    <div class="search-card">
+      <h2>Track Your Package</h2>
 
-      <div class="search-row">
+      <div class="search-box">
         <input
           type="text"
           id="trackingInput"
@@ -169,47 +277,88 @@
         </button>
       </div>
 
-      <div class="message" id="message"></div>
+      <div class="message" id="message">
+        Please enter a tracking number.
+      </div>
     </div>
 
-    <div class="result" id="result">
 
-      <h2>Shipment Details</h2>
+    <!-- TRACKING RESULT -->
+    <div class="tracking-card" id="trackingCard">
 
-      <div class="status" id="status">
-        In Transit
+      <div class="tracking-number">
+        <p>TRACKING NUMBER</p>
+        <h2 id="trackingNumber">---</h2>
       </div>
 
-      <div class="details">
 
-        <div class="card">
-          <strong>Tracking Number</strong>
-          <span id="trackingNumber"></span>
+      <!-- STATUS -->
+      <div class="status-box">
+        <h3 id="status">🚚 In Transit</h3>
+        <p id="statusText">
+          Your shipment is currently on its way.
+        </p>
+      </div>
+
+
+      <!-- INFORMATION -->
+      <div class="info-grid">
+
+        <div class="info-box">
+          <span>ORIGIN</span>
+          <strong id="origin">Shipment Origin</strong>
         </div>
 
-        <div class="card">
-          <strong>Current Status</strong>
-          <span id="shipmentStatus"></span>
+        <div class="info-box">
+          <span>DESTINATION</span>
+          <strong id="destination">Shipment Destination</strong>
         </div>
 
-        <div class="card">
-          <strong>Origin</strong>
-          <span id="origin"></span>
+        <div class="info-box">
+          <span>SERVICE</span>
+          <strong id="service">Standard Delivery</strong>
         </div>
 
-        <div class="card">
-          <strong>Destination</strong>
-          <span id="destination"></span>
+        <div class="info-box">
+          <span>ESTIMATED DELIVERY</span>
+          <strong id="delivery">Delivery information available soon</strong>
         </div>
 
-        <div class="card">
-          <strong>Service</strong>
-          <span id="service"></span>
+      </div>
+
+
+      <!-- TIMELINE -->
+      <h3 class="timeline-title">Shipment Updates</h3>
+
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+
+          <div class="timeline-content">
+            <h4>🚚 Shipment In Transit</h4>
+            <p>Your package is currently moving through the delivery network.</p>
+          </div>
         </div>
 
-        <div class="card">
-          <strong>Estimated Delivery</strong>
-          <span id="delivery"></span>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+
+          <div class="timeline-content">
+            <h4>📦 Shipment Processed</h4>
+            <p>Your shipment has been processed and prepared for transportation.</p>
+          </div>
+        </div>
+
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+
+          <div class="timeline-content">
+            <h4>✅ Shipment Information Received</h4>
+            <p>Shipment details have been successfully received.</p>
+          </div>
         </div>
 
       </div>
@@ -218,9 +367,11 @@
 
   </div>
 
-  <div class="footer">
-    © 2026 Shipment Tracking
-  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 Shipment Tracking System. All rights reserved.
+  </footer>
 
 
   <script>
@@ -232,25 +383,40 @@
         .value
         .trim();
 
-      const result = document.getElementById("result");
+      const trackingCard =
+        document.getElementById("trackingCard");
 
-      const message = document.getElementById("message");
+      const message =
+        document.getElementById("message");
 
-      message.innerHTML = "";
+
+      /* CHECK IF TRACKING NUMBER IS EMPTY */
 
       if (input === "") {
-        result.style.display = "none";
-        message.innerHTML = "Please enter a tracking number.";
+
+        trackingCard.style.display = "none";
+
+        message.style.display = "block";
+
         return;
+
       }
+
+
+      /* HIDE ERROR MESSAGE */
+
+      message.style.display = "none";
+
+
+      /* SHOW TRACKING INFORMATION */
 
       document.getElementById("trackingNumber").innerHTML = input;
 
-      document.getElementById("shipmentStatus").innerHTML =
-        "In Transit";
-
       document.getElementById("status").innerHTML =
         "🚚 In Transit";
+
+      document.getElementById("statusText").innerHTML =
+        "Your shipment is currently on its way.";
 
       document.getElementById("origin").innerHTML =
         "Shipment Origin";
@@ -264,9 +430,34 @@
       document.getElementById("delivery").innerHTML =
         "Estimated delivery information coming soon";
 
-      result.style.display = "block";
+
+      /* SHOW THE RESULT CARD */
+
+      trackingCard.style.display = "block";
+
+
+      /* SCROLL TO RESULT */
+
+      trackingCard.scrollIntoView({
+        behavior: "smooth"
+      });
 
     }
+
+
+    /* ALLOW ENTER KEY */
+
+    document
+      .getElementById("trackingInput")
+      .addEventListener("keypress", function(event) {
+
+        if (event.key === "Enter") {
+
+          trackShipment();
+
+        }
+
+      });
 
   </script>
 
