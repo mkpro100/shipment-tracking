@@ -1,122 +1,513 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
 
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Shipment Tracking</title>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Font Awesome Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  >
+
+  <!-- Google Font -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
 
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f7fb;
-      color: #172033;
+      font-family: "Poppins", sans-serif;
+      background: #f4f8fc;
+      color: #102a43;
+      overflow-x: hidden;
     }
 
-    /* HEADER */
 
-    .header {
-      background: linear-gradient(135deg, #102a43, #1677ff);
+    /* ==============================
+       NAVIGATION
+    ============================== */
+
+    nav {
+      width: 100%;
+      min-height: 75px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 15px 8%;
+
+      background:
+        linear-gradient(
+          90deg,
+          #031b36,
+          #07559a
+        );
+
       color: white;
-      padding: 70px 20px;
-      text-align: center;
-    }
 
-    .header h1 {
-      margin: 0 0 15px;
-      font-size: 38px;
-    }
-
-    .header p {
-      margin: 0;
-      font-size: 17px;
-      opacity: 0.9;
-    }
-
-    /* MAIN CONTAINER */
-
-    .container {
-      max-width: 700px;
-      margin: -30px auto 50px;
-      padding: 0 20px;
-    }
-
-    .card {
-      background: white;
-      padding: 35px;
-      border-radius: 16px;
+      position: relative;
+      z-index: 100;
 
       box-shadow:
-        0 10px 35px rgba(0,0,0,0.10);
+        0 4px 20px rgba(0,0,0,0.2);
     }
 
-    .card h2 {
-      margin-top: 0;
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+
+    .logo i {
+      color: #f5b800;
+      margin-right: 8px;
+    }
+
+
+    .logo span {
+      color: #f5b800;
+    }
+
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+
+    nav ul li a:hover {
+      color: #f5b800;
+    }
+
+
+
+    /* ==============================
+       HERO SECTION
+    ============================== */
+
+    .hero {
+
+      min-height: 650px;
+
+      position: relative;
+
+      overflow: hidden;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
       text-align: center;
-      font-size: 25px;
+
+      padding: 80px 20px 130px;
+
+
+      background:
+
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(30,144,255,0.35),
+          transparent 30%
+        ),
+
+        radial-gradient(
+          circle at 80% 70%,
+          rgba(245,184,0,0.20),
+          transparent 30%
+        ),
+
+        linear-gradient(
+          135deg,
+          #031b36,
+          #07559a,
+          #0a7cc2
+        );
+
     }
 
-    .card p {
-      text-align: center;
-      color: #697586;
-      margin-bottom: 30px;
-    }
 
-    /* FORM */
 
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
+    /* TECHNOLOGY GRID */
 
-    input {
+    .hero::before {
+
+      content: "";
+
+      position: absolute;
+
       width: 100%;
-      padding: 16px;
+      height: 100%;
 
-      border: 1px solid #ccd6e0;
-      border-radius: 10px;
+      top: 0;
+      left: 0;
+
+
+      background-image:
+
+        linear-gradient(
+          rgba(255,255,255,0.08) 1px,
+          transparent 1px
+        ),
+
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.08) 1px,
+          transparent 1px
+        );
+
+
+      background-size: 50px 50px;
+
+
+      animation:
+        gridMove 12s linear infinite;
+
+    }
+
+
+    @keyframes gridMove {
+
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(50px);
+      }
+
+    }
+
+
+
+    .hero-content {
+
+      position: relative;
+
+      z-index: 10;
+
+      max-width: 900px;
+
+      color: white;
+
+    }
+
+
+    .hero-content h1 {
+
+      font-size: clamp(38px, 6vw, 65px);
+
+      font-weight: 800;
+
+      line-height: 1.2;
+
+      margin-bottom: 20px;
+
+      text-shadow:
+        0 5px 20px rgba(0,0,0,0.2);
+
+    }
+
+
+    .hero-content h1 span {
+
+      color: #f5b800;
+
+    }
+
+
+    .hero-content p {
+
+      font-size: 17px;
+
+      line-height: 1.7;
+
+      max-width: 700px;
+
+      margin:
+        0 auto 35px;
+
+      color:
+        rgba(255,255,255,0.9);
+
+    }
+
+
+
+    /* ==============================
+       AIRPLANE
+    ============================== */
+
+    .airplane {
+
+      position: absolute;
+
+      top: 70px;
+
+      left: -100px;
+
+      font-size: 55px;
+
+      color: white;
+
+      opacity: 0.9;
+
+      z-index: 2;
+
+      animation:
+        fly 18s linear infinite;
+
+    }
+
+
+    @keyframes fly {
+
+      0% {
+
+        left: -100px;
+
+        transform:
+          translateY(0)
+          rotate(10deg);
+
+      }
+
+
+      50% {
+
+        transform:
+          translateY(-30px)
+          rotate(10deg);
+
+      }
+
+
+      100% {
+
+        left: 110%;
+
+        transform:
+          translateY(0)
+          rotate(10deg);
+
+      }
+
+    }
+
+
+
+    /* ==============================
+       CLOUDS
+    ============================== */
+
+    .cloud {
+
+      position: absolute;
+
+      color: white;
+
+      opacity: 0.15;
+
+      font-size: 100px;
+
+    }
+
+
+    .cloud1 {
+
+      top: 150px;
+
+      left: 5%;
+
+      animation:
+        cloudMove 15s ease-in-out infinite;
+
+    }
+
+
+    .cloud2 {
+
+      top: 250px;
+
+      right: 8%;
+
+      animation:
+        cloudMove 20s ease-in-out infinite reverse;
+
+    }
+
+
+    @keyframes cloudMove {
+
+      0% {
+        transform: translateX(-30px);
+      }
+
+      50% {
+        transform: translateX(30px);
+      }
+
+      100% {
+        transform: translateX(-30px);
+      }
+
+    }
+
+
+
+    /* ==============================
+       TRACKING BOX
+    ============================== */
+
+    .tracking-box {
+
+      background:
+        rgba(255,255,255,0.97);
+
+      padding: 35px;
+
+      border-radius: 25px;
+
+      box-shadow:
+        0 25px 70px rgba(0,0,0,0.30);
+
+      max-width: 780px;
+
+      margin: auto;
+
+      color: #102a43;
+
+    }
+
+
+    .tracking-box h2 {
+
+      color: #063b70;
+
+      font-size: 27px;
+
+      margin-bottom: 12px;
+
+    }
+
+
+    .tracking-box h2 i {
+
+      color: #f5b800;
+
+      margin-right: 8px;
+
+    }
+
+
+    .tracking-description {
+
+      color: #64748b;
+
+      font-size: 15px;
+
+      margin-bottom: 25px;
+
+    }
+
+
+
+    .tracking-form {
+
+      display: flex;
+
+      gap: 12px;
+
+    }
+
+
+    .tracking-form input {
+
+      flex: 1;
+
+      padding: 18px 20px;
+
+      border-radius: 12px;
+
+      border:
+        1px solid #d4e0eb;
 
       font-size: 16px;
 
+      font-family: inherit;
+
       outline: none;
 
-      margin-bottom: 18px;
+      color: #102a43;
+
     }
 
-    input:focus {
-      border-color: #1677ff;
+
+    .tracking-form input:focus {
+
+      border-color: #0a7cc2;
 
       box-shadow:
-        0 0 0 3px rgba(22,119,255,0.12);
+        0 0 0 4px
+        rgba(10,124,194,0.12);
+
     }
 
-    button {
 
-      width: 100%;
+    .tracking-form button {
 
-      padding: 16px;
+      padding:
+        18px 30px;
 
       border: none;
 
-      border-radius: 10px;
+      border-radius: 12px;
 
-      background: #1677ff;
+      background:
+        linear-gradient(
+          135deg,
+          #0a7cc2,
+          #07559a
+        );
 
       color: white;
 
-      font-size: 17px;
+      font-size: 16px;
 
-      font-weight: bold;
+      font-family: inherit;
+
+      font-weight: 700;
 
       cursor: pointer;
 
@@ -124,103 +515,529 @@
 
     }
 
-    button:hover {
 
-      background: #0f66db;
+    .tracking-form button:hover {
+
+      transform:
+        translateY(-3px);
+
+      box-shadow:
+        0 12px 25px
+        rgba(10,124,194,0.35);
 
     }
 
-    /* FEATURES */
 
-    .features {
+    .tracking-form button:disabled {
+
+      opacity: 0.7;
+
+      cursor: not-allowed;
+
+      transform: none;
+
+    }
+
+
+
+    /* ==============================
+       ROAD
+    ============================== */
+
+    .road {
+
+      position: absolute;
+
+      bottom: 0;
+
+      width: 100%;
+
+      height: 100px;
+
+      background:
+        #14212c;
+
+      z-index: 5;
+
+    }
+
+
+    .road::before {
+
+      content: "";
+
+      position: absolute;
+
+      top: 48px;
+
+      width: 100%;
+
+      height: 5px;
+
+      background:
+
+        repeating-linear-gradient(
+          90deg,
+
+          white 0,
+
+          white 50px,
+
+          transparent 50px,
+
+          transparent 100px
+        );
+
+
+      animation:
+        roadMove 2s linear infinite;
+
+    }
+
+
+    @keyframes roadMove {
+
+      from {
+        background-position: 0;
+      }
+
+      to {
+        background-position: -100px;
+      }
+
+    }
+
+
+
+    /* ==============================
+       TRUCK
+    ============================== */
+
+    .truck {
+
+      position: absolute;
+
+      bottom: 28px;
+
+      left: -100px;
+
+      font-size: 50px;
+
+      color: #f5b800;
+
+      z-index: 10;
+
+      animation:
+        truckDrive 15s linear infinite;
+
+    }
+
+
+    @keyframes truckDrive {
+
+      from {
+        left: -100px;
+      }
+
+      to {
+        left: 110%;
+      }
+
+    }
+
+
+
+    /* ==============================
+       CAR
+    ============================== */
+
+    .car {
+
+      position: absolute;
+
+      bottom: 25px;
+
+      right: -100px;
+
+      font-size: 40px;
+
+      color: #3aa8ff;
+
+      z-index: 10;
+
+      animation:
+        carDrive 12s linear infinite;
+
+    }
+
+
+    @keyframes carDrive {
+
+      from {
+        right: -100px;
+      }
+
+      to {
+        right: 110%;
+      }
+
+    }
+
+
+
+    /* ==============================
+       RESULT AREA
+    ============================== */
+
+    #result {
 
       max-width: 1000px;
 
-      margin: 0 auto 50px;
+      margin: 50px auto;
 
-      padding: 0 20px;
+      padding:
+        0 20px;
+
+    }
+
+
+    .result-card {
+
+      background: white;
+
+      border-radius: 22px;
+
+      padding: 35px;
+
+      box-shadow:
+        0 15px 45px
+        rgba(0,0,0,0.12);
+
+      border-left:
+        6px solid #f5b800;
+
+    }
+
+
+    .result-card h2 {
+
+      color: #063b70;
+
+      margin-bottom: 25px;
+
+    }
+
+
+
+    .shipment-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(200px, 1fr));
+
+      gap: 18px;
+
+    }
+
+
+    .shipment-item {
+
+      background: #f4f9ff;
+
+      padding: 18px;
+
+      border-radius: 12px;
+
+      border:
+        1px solid #e2edf7;
+
+    }
+
+
+    .shipment-item strong {
+
+      display: block;
+
+      color: #0a7cc2;
+
+      font-size: 13px;
+
+      margin-bottom: 7px;
+
+    }
+
+
+
+    .status {
+
+      margin-top: 25px;
+
+      padding: 18px;
+
+      border-radius: 12px;
+
+      text-align: center;
+
+      font-weight: 700;
+
+      background: #e8f5ff;
+
+      color: #07559a;
+
+      border:
+        1px solid #b9e0f7;
+
+    }
+
+
+
+    /* ==============================
+       SERVICES
+    ============================== */
+
+    .services {
+
+      padding: 90px 8%;
+
+      text-align: center;
+
+      background: white;
+
+    }
+
+
+    .section-title {
+
+      font-size: 35px;
+
+      color: #063b70;
+
+      margin-bottom: 12px;
+
+    }
+
+
+    .section-title span {
+
+      color: #f5b800;
+
+    }
+
+
+    .section-text {
+
+      color: #64748b;
+
+      margin-bottom: 50px;
+
+    }
+
+
+    .service-grid {
 
       display: grid;
 
       grid-template-columns:
         repeat(auto-fit, minmax(220px, 1fr));
 
-      gap: 20px;
+      gap: 25px;
 
     }
 
-    .feature {
 
-      background: white;
+    .service-card {
 
-      padding: 25px;
+      padding: 35px 25px;
 
-      border-radius: 14px;
+      border-radius: 20px;
 
-      text-align: center;
+      background: #f7fbff;
+
+      border:
+        1px solid #e2edf7;
+
+      transition: 0.3s;
+
+    }
+
+
+    .service-card:hover {
+
+      transform:
+        translateY(-10px);
 
       box-shadow:
-        0 5px 20px rgba(0,0,0,0.06);
+        0 18px 40px
+        rgba(0,80,150,0.15);
+
+      border-color:
+        #f5b800;
 
     }
 
-    .feature h3 {
 
-      margin-top: 0;
+    .service-card i {
 
-      color: #102a43;
+      font-size: 45px;
 
-    }
+      color: #0a7cc2;
 
-    .feature p {
-
-      color: #697586;
-
-      line-height: 1.6;
+      margin-bottom: 18px;
 
     }
 
-    /* FOOTER */
 
-    .footer {
+    .service-card h3 {
 
-      background: #102a43;
+      color: #063b70;
+
+      margin-bottom: 10px;
+
+    }
+
+
+    .service-card p {
+
+      color: #64748b;
+
+      font-size: 14px;
+
+      line-height: 1.7;
+
+    }
+
+
+
+    /* ==============================
+       FOOTER
+    ============================== */
+
+    footer {
+
+      background: #031b36;
 
       color: white;
 
       text-align: center;
 
-      padding: 25px 20px;
-
-      margin-top: 40px;
+      padding: 35px 20px;
 
     }
 
-    .footer p {
 
-      margin: 5px 0;
+    footer span {
 
-      opacity: 0.8;
+      color: #f5b800;
+
+      font-weight: 700;
 
     }
 
-    /* MOBILE */
 
-    @media (max-width: 600px) {
 
-      .header {
+    /* ==============================
+       MOBILE DESIGN
+    ============================== */
 
-        padding: 55px 20px;
+    @media (max-width: 768px) {
+
+      nav {
+
+        padding:
+          15px 20px;
 
       }
 
-      .header h1 {
 
-        font-size: 30px;
+      nav ul {
+
+        display: none;
 
       }
 
-      .card {
+
+      .logo {
+
+        font-size: 20px;
+
+      }
+
+
+      .hero {
+
+        min-height: 680px;
+
+        padding:
+          70px 18px 130px;
+
+      }
+
+
+      .hero-content h1 {
+
+        font-size: 38px;
+
+      }
+
+
+      .hero-content p {
+
+        font-size: 15px;
+
+      }
+
+
+      .tracking-box {
+
+        padding: 28px 20px;
+
+      }
+
+
+      .tracking-box h2 {
+
+        font-size: 24px;
+
+      }
+
+
+      .tracking-form {
+
+        flex-direction: column;
+
+      }
+
+
+      .tracking-form button {
+
+        width: 100%;
+
+      }
+
+
+      .airplane {
+
+        font-size: 38px;
+
+      }
+
+
+      .truck {
+
+        font-size: 40px;
+
+      }
+
+
+      .car {
+
+        font-size: 32px;
+
+      }
+
+
+      .result-card {
 
         padding: 25px 20px;
 
@@ -236,179 +1053,829 @@
 <body>
 
 
-  <!-- HEADER -->
+<!-- =========================
+     NAVIGATION
+========================= -->
 
-  <section class="header">
+<nav>
 
-    <h1>Shipment Tracking</h1>
+  <div class="logo">
+
+    <i class="fa-solid fa-plane-departure"></i>
+
+    GLOBAL<span>TRACK</span>
+
+  </div>
+
+
+  <ul>
+
+    <li>
+      <a href="#home">
+        Home
+      </a>
+    </li>
+
+    <li>
+      <a href="#services">
+        Services
+      </a>
+    </li>
+
+    <li>
+      <a href="#tracking">
+        Track Shipment
+      </a>
+    </li>
+
+  </ul>
+
+</nav>
+
+
+
+<!-- =========================
+     HERO SECTION
+========================= -->
+
+<section
+  class="hero"
+  id="home"
+>
+
+
+  <!-- AIRPLANE -->
+
+  <div class="airplane">
+
+    <i class="fa-solid fa-plane"></i>
+
+  </div>
+
+
+
+  <!-- CLOUDS -->
+
+  <div class="cloud cloud1">
+
+    <i class="fa-solid fa-cloud"></i>
+
+  </div>
+
+
+  <div class="cloud cloud2">
+
+    <i class="fa-solid fa-cloud"></i>
+
+  </div>
+
+
+
+  <!-- MAIN CONTENT -->
+
+  <div class="hero-content">
+
+
+    <h1>
+
+      Track Your Shipment
+
+      <span>
+        Anywhere in the World
+      </span>
+
+    </h1>
+
+
 
     <p>
-      Fast, secure and reliable shipment tracking
+
+      Fast, secure and reliable international shipment tracking.
+      Enter your tracking number below to see the latest
+      information about your package.
+
     </p>
 
-  </section>
+
+
+    <!-- TRACKING BOX -->
+
+    <div
+      class="tracking-box"
+      id="tracking"
+    >
+
+
+      <h2>
+
+        <i class="fa-solid fa-location-dot"></i>
+
+        Track Your Shipment
+
+      </h2>
 
 
 
-  <!-- TRACKING CARD -->
+      <p class="tracking-description">
 
-  <main class="container">
+        Enter your unique tracking number below to view your
+        shipment information.
 
-    <div class="card">
-
-      <h2>Track Your Shipment</h2>
-
-      <p>
-        Enter your tracking number below to view
-        your shipment information.
       </p>
 
 
-      <form id="trackingForm">
 
-
-        <label for="trackingInput">
-
-          Tracking Number
-
-        </label>
+      <div class="tracking-form">
 
 
         <input
-
-          id="trackingInput"
-
           type="text"
-
+          id="trackingNumber"
           placeholder="Example: TRK-C783202A3A00"
-
           autocomplete="off"
-
-          required
-
         >
 
 
-        <button type="submit">
+
+        <button
+          id="trackButton"
+          onclick="trackShipment()"
+        >
+
+          <i class="fa-solid fa-magnifying-glass"></i>
 
           Track Shipment
 
         </button>
 
 
-      </form>
+      </div>
 
 
     </div>
 
-  </main>
+
+  </div>
 
 
 
-  <!-- FEATURES -->
+  <!-- ROAD -->
 
-  <section class="features">
+  <div class="road"></div>
 
 
-    <div class="feature">
 
-      <h3>📦 Easy Tracking</h3>
+  <!-- TRUCK -->
+
+  <div class="truck">
+
+    <i class="fa-solid fa-truck"></i>
+
+  </div>
+
+
+
+  <!-- CAR -->
+
+  <div class="car">
+
+    <i class="fa-solid fa-car"></i>
+
+  </div>
+
+
+</section>
+
+
+
+<!-- =========================
+     TRACKING RESULT
+========================= -->
+
+<div id="result"></div>
+
+
+
+<!-- =========================
+     SERVICES
+========================= -->
+
+<section
+  class="services"
+  id="services"
+>
+
+
+  <h2 class="section-title">
+
+    Our
+    <span>
+      Logistics Services
+    </span>
+
+  </h2>
+
+
+
+  <p class="section-text">
+
+    Connecting people, packages and businesses around the world.
+
+  </p>
+
+
+
+  <div class="service-grid">
+
+
+    <!-- AIR FREIGHT -->
+
+    <div class="service-card">
+
+      <i class="fa-solid fa-plane"></i>
+
+      <h3>
+        Air Freight
+      </h3>
 
       <p>
-        Track your shipment quickly using your
-        unique tracking number.
+
+        Fast and reliable international air transportation.
+
       </p>
 
     </div>
 
 
 
-    <div class="feature">
+    <!-- ROAD DELIVERY -->
 
-      <h3>📍 Shipment Updates</h3>
+    <div class="service-card">
+
+      <i class="fa-solid fa-truck"></i>
+
+      <h3>
+        Road Delivery
+      </h3>
 
       <p>
-        View the latest information about your
-        shipment and delivery status.
+
+        Secure transportation and delivery by road.
+
       </p>
 
     </div>
 
 
 
-    <div class="feature">
+    <!-- SEA FREIGHT -->
 
-      <h3>🔒 Secure System</h3>
+    <div class="service-card">
+
+      <i class="fa-solid fa-ship"></i>
+
+      <h3>
+        Sea Freight
+      </h3>
 
       <p>
-        Your shipment information is handled
-        through a secure tracking system.
+
+        Reliable cargo transportation across international waters.
+
       </p>
 
     </div>
 
 
-  </section>
+
+    <!-- PACKAGE TRACKING -->
+
+    <div class="service-card">
+
+      <i class="fa-solid fa-box"></i>
+
+      <h3>
+        Package Tracking
+      </h3>
+
+      <p>
+
+        Monitor your shipment from pickup to final delivery.
+
+      </p>
+
+    </div>
+
+
+  </div>
+
+
+</section>
 
 
 
-  <!-- FOOTER -->
+<!-- =========================
+     FOOTER
+========================= -->
 
-  <footer class="footer">
+<footer>
 
-    <p>
-      © 2026 Shipment Tracking System
-    </p>
+  <p>
 
-    <p>
-      Reliable Shipment Tracking
-    </p>
+    © 2026
 
-  </footer>
+    <span>
+      GLOBALTRACK
+    </span>
 
+    |
 
+    Fast • Secure • Reliable
 
-  <!-- JAVASCRIPT -->
+  </p>
 
-  <script>
-
-    const form =
-      document.getElementById("trackingForm");
-
-
-    form.addEventListener("submit", function(event) {
+</footer>
 
 
-      event.preventDefault();
+
+<!-- =========================
+     SUPABASE + JAVASCRIPT
+========================= -->
+
+<script>
 
 
-      const trackingNumber =
-
-        document
-          .getElementById("trackingInput")
-          .value
-          .trim();
+/* ==============================
+   SUPABASE CONFIGURATION
+============================== */
 
 
-      if (!trackingNumber) {
+const SUPABASE_URL =
+  "https://dgwncijvfhbsgakmiqo.supabase.co";
 
-        return;
+
+const SUPABASE_ANON_KEY =
+  "sb_publishable_dyltRd6ccwZ9CvNVpwjCXw_GbmBkpiB";
+
+
+const supabaseClient =
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+  );
+
+
+
+/* ==============================
+   SAFE TEXT FUNCTION
+============================== */
+
+function escapeHTML(value) {
+
+  if (
+    value === null ||
+    value === undefined
+  ) {
+
+    return "N/A";
+
+  }
+
+
+  const div =
+    document.createElement("div");
+
+
+  div.textContent =
+    String(value);
+
+
+  return div.innerHTML;
+
+}
+
+
+
+/* ==============================
+   TRACK SHIPMENT
+============================== */
+
+async function trackShipment() {
+
+
+  const trackingNumber =
+    document
+      .getElementById("trackingNumber")
+      .value
+      .trim();
+
+
+  const result =
+    document.getElementById("result");
+
+
+  const trackButton =
+    document.getElementById("trackButton");
+
+
+
+  /* CHECK EMPTY INPUT */
+
+
+  if (!trackingNumber) {
+
+
+    result.innerHTML = `
+
+      <div class="result-card">
+
+        <h2>
+          ⚠️ Tracking Number Required
+        </h2>
+
+        <p>
+
+          Please enter your tracking number and try again.
+
+        </p>
+
+      </div>
+
+    `;
+
+
+    result.scrollIntoView({
+      behavior: "smooth"
+    });
+
+
+    return;
+
+  }
+
+
+
+  /* SHOW LOADING */
+
+
+  trackButton.disabled = true;
+
+
+  trackButton.innerHTML = `
+
+    <i class="fa-solid fa-spinner fa-spin"></i>
+
+    Searching...
+
+  `;
+
+
+  result.innerHTML = `
+
+    <div class="result-card">
+
+      <h2>
+
+        <i class="fa-solid fa-spinner fa-spin"></i>
+
+        Searching for your shipment...
+
+      </h2>
+
+      <p>
+
+        Please wait while we check your tracking number.
+
+      </p>
+
+    </div>
+
+  `;
+
+
+  result.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+
+
+
+  try {
+
+
+    /* SEARCH SUPABASE */
+
+
+    const {
+      data,
+      error
+    } = await supabaseClient
+
+      .from("shipments")
+
+      .select("*")
+
+      .eq(
+        "tracking_number",
+        trackingNumber
+      )
+
+      .maybeSingle();
+
+
+
+    /* ERROR OR NOT FOUND */
+
+
+    if (error) {
+
+      console.error(error);
+
+
+      result.innerHTML = `
+
+        <div class="result-card">
+
+          <h2>
+            ❌ Unable to Check Shipment
+          </h2>
+
+          <p>
+
+            There was a problem connecting to the shipment database.
+
+          </p>
+
+        </div>
+
+      `;
+
+
+      return;
+
+    }
+
+
+
+    if (!data) {
+
+
+      result.innerHTML = `
+
+        <div class="result-card">
+
+          <h2>
+            ❌ Shipment Not Found
+          </h2>
+
+
+          <p>
+
+            We could not find a shipment with tracking number:
+
+            <strong>
+              ${escapeHTML(trackingNumber)}
+            </strong>
+
+          </p>
+
+
+          <br>
+
+
+          <p>
+
+            Please check the tracking number and try again.
+
+          </p>
+
+        </div>
+
+      `;
+
+
+      return;
+
+    }
+
+
+
+    /* DISPLAY SHIPMENT */
+
+
+    result.innerHTML = `
+
+      <div class="result-card">
+
+
+        <h2>
+
+          <i class="fa-solid fa-box-open"></i>
+
+          Shipment Information
+
+        </h2>
+
+
+
+        <div class="shipment-grid">
+
+
+          <div class="shipment-item">
+
+            <strong>
+              Tracking Number
+            </strong>
+
+            ${escapeHTML(data.tracking_number)}
+
+          </div>
+
+
+
+          <div class="shipment-item">
+
+            <strong>
+              Shipment Status
+            </strong>
+
+            ${escapeHTML(
+              data.status || "Processing"
+            )}
+
+          </div>
+
+
+
+          <div class="shipment-item">
+
+            <strong>
+              Sender
+            </strong>
+
+            ${escapeHTML(
+              data.sender_name
+            )}
+
+          </div>
+
+
+
+          <div class="shipment-item">
+
+            <strong>
+              Receiver
+            </strong>
+
+            ${escapeHTML(
+              data.receiver_name
+            )}
+
+          </div>
+
+
+
+          <div class="shipment-item">
+
+            <strong>
+              Origin
+            </strong>
+
+            ${escapeHTML(
+              data.origin
+            )}
+
+          </div>
+
+
+
+          <div class="shipment-item">
+
+            <strong>
+              Destination
+            </strong>
+
+            ${escapeHTML(
+              data.destination
+            )}
+
+          </div>
+
+
+
+          <div class="shipment-item">
+
+            <strong>
+              Current Location
+            </strong>
+
+            ${escapeHTML(
+              data.current_location
+            )}
+
+          </div>
+
+
+        </div>
+
+
+
+        <div class="status">
+
+          <i class="fa-solid fa-truck-fast"></i>
+
+          Current Status:
+
+          ${escapeHTML(
+            data.status || "Processing"
+          )}
+
+        </div>
+
+
+      </div>
+
+    `;
+
+
+  }
+
+
+  catch (error) {
+
+
+    console.error(error);
+
+
+    result.innerHTML = `
+
+      <div class="result-card">
+
+        <h2>
+          ❌ Something Went Wrong
+        </h2>
+
+        <p>
+
+          Please try again later.
+
+        </p>
+
+      </div>
+
+    `;
+
+  }
+
+
+  finally {
+
+
+    trackButton.disabled = false;
+
+
+    trackButton.innerHTML = `
+
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      Track Shipment
+
+    `;
+
+  }
+
+
+}
+
+
+
+/* ==============================
+   PRESS ENTER TO TRACK
+============================== */
+
+
+document
+  .getElementById("trackingNumber")
+  .addEventListener(
+    "keydown",
+    function(event) {
+
+
+      if (event.key === "Enter") {
+
+
+        trackShipment();
+
 
       }
 
 
-      window.location.href =
-
-        "tracking.html?tracking=" +
-
-        encodeURIComponent(trackingNumber);
+    }
+  );
 
 
-    });
-
-  </script>
+</script>
 
 
 </body>
-
 </html>
