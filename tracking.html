@@ -126,26 +126,16 @@
 
   <script>
 
-    const SUPABASE_URL = "https://dgwncijvafhbsgakmiqo.supabase.co";
+const SUPABASE_URL = "https://dgwncijvafhbsgakmiqo.supabase.co";
+
+const SUPABASE_KEY = "sb_publishable_dyltRd6ccwZ9CvNVpwjCXw_GbmBkpiB";
 
 const supabaseClient = supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
 
-const supabaseClient = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-
-    async function trackShipment() {
-
-      const trackingNumber =
-        document.getElementById("trackingNumber").value.trim();
-
-      const result =
-        document.getElementById("result");
+async function trackShipment() {
 
       result.innerHTML = "";
 
