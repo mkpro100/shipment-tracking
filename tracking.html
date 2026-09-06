@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Shipment Tracking</title>
 
+  <!-- Supabase JavaScript Library -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
@@ -38,7 +38,7 @@
       background: white;
       padding: 25px;
       border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     }
 
     h2 {
@@ -102,11 +102,13 @@
   </header>
 
   <div class="container">
+
     <div class="card">
 
       <h2>Track Your Shipment</h2>
 
       <div class="search-box">
+
         <input
           type="text"
           id="trackingNumber"
@@ -116,29 +118,44 @@
         <button onclick="trackShipment()">
           Track
         </button>
+
       </div>
 
       <div id="result"></div>
 
     </div>
+
   </div>
 
 
   <script>
 
-const SUPABASE_URL = "https://dgwncijvafhbsgakmiqo.supabase.co";
+    // Supabase connection
+    const SUPABASE_URL = "https://dgwncijvafhbsgakmiqo.supabase.co";
 
-const SUPABASE_KEY = "sb_publishable_dyltRd6ccwZ9CvNVpwjCXw_GbmBkpiB";
+    const SUPABASE_KEY = "sb_publishable_dyltRd6ccwZ9CvNVpwjCXw_GbmBkpiB";
 
-const supabaseClient = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+    const supabaseClient = supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
 
-async function trackShipment() {
 
+    // Track shipment
+    async function trackShipment() {
+
+      const trackingNumber = document
+        .getElementById("trackingNumber")
+        .value
+        .trim();
+
+      const result = document.getElementById("result");
+
+      // Clear previous result
       result.innerHTML = "";
 
+
+      // Check if tracking number was entered
       if (!trackingNumber) {
 
         result.innerHTML =
@@ -148,213 +165,100 @@ async function trackShipment() {
       }
 
 
+      // Show searching message
       result.innerHTML =
         "<p>Searching for your shipment...</p>";
 
 
-      const { data: shipment, error } =
-        await supabaseClient
-          .from("shipments")
-          .select("*")
-          .eq("tracking_number", trackingNumber)
-          .single();
+      try {
+
+        // Search for shipment
+        const { data: shipment, error } =
+          await supabaseClient
+            .from("shipments")
+            .select("*")
+            .eq("tracking_number", trackingNumber)
+            .single();
 
 
-      if (error || !shipment) {
+        // Shipment not found
+        if (error || !shipment) {
+
+          result.innerHTML =
+            '<p class="error">Shipment not found.</p>';
+
+          return;
+        }
+
+
+        // Display shipment information
+        let html = `
+
+          <div class="shipment-info">
+
+            <h3>Shipment Found</h3>
+
+            <p>
+              <strong>Tracking Number:</strong>
+              ${shipment.tracking_number || "N/A"}
+            </p>
+
+            <p>
+              <strong>Origin:</strong>
+              ${shipment.origin || "N/A"}
+            </p>
+
+            <p>
+              <strong>Destination:</strong>
+              ${shipment.destination || "N/A"}
+            </p>
+
+            <p>
+              <strong>Service:</strong>
+              ${shipment.service || "N/A"}
+            </p>
+
+            <p>
+              <strong>Status:</strong>
+              ${shipment.status || "N/A"}
+            </p>
+
+            <p>
+              <strong>Estimated Delivery:</strong>
+              ${shipment.estimated_delivery || "N/A"}
+            </p>
+
+          </div>
+
+        `;
+
+
+        result.innerHTML = html;
+
+      } catch (err) {
+
+        console.error(err);
 
         result.innerHTML =
-          '<p class="error">Shipment not found.</p>';
+          '<p class="error">Something went wrong. Please try again.</p>';
 
-        return;
       }
-
-
-      let html = `
-
-        <div class="shipment-info">
-
-          <h3>Shipment Found</h3>
-
-          <p><strong>Tracking Number:</strong>
-          ${shipment.tracking_number || "N/A"}</p>
-
-          <p><strong>Status:</strong>
-          ${shipment.status || "N/A"}</p>
-
-        </div>
-
-      `;
-
-
-      const { data: events } =
-        await supabaseClient
-          .from("shipment_events")
-          .select("*")
-          .eq("shipment_id", shipment.id)
-          .order("created_at", { ascending: false });
-
-
-      if (events && events.length > 0) {
-
-        html += "<h3>Tracking History</h3>";
-
-        events.forEach(event => {
-
-          html += `
-
-            <div class="event">
-
-              <strong>${event.status || "Update"}</strong>
-
-              <br>
-
-              ${event.location || ""}
-
-              <br>
-
-              <small>
-                ${event.created_at
-                  ? new Date(event.created_at).toLocaleString()
-                  : ""}
-              </small>
-
-            </div>
-
-          `;
-
-        });
-
-      <script>
-
-const SUPABASE_URL = "https://dgwncijvafhbsgakmiqo.supabase.co";
-
-const SUPABASE_KEY = "sb_publishable_dyltRd6ccwZ9CvNVpwjCXw_GbmBkpiB";
-
-const supabaseClient = supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-
-async function trackShipment() {
-
-  const trackingNumber = document
-    .getElementById("trackingNumber")
-    .value
-    .trim();
-
-  const result = document.getElementById("result");
-
-  result.innerHTML = "";
-
-  if (!trackingNumber) {
-
-    result.innerHTML =
-      '<p class="error">Please enter a tracking number.</p>';
-
-    return;
-  }
-
-
-  result.innerHTML = "<p>Searching for your shipment...</p>";
-
-
-  const { data: shipment, error } = await supabaseClient
-    .from("shipments")
-    .select("*")
-    .eq("tracking_number", trackingNumber)
-    .single();
-
-
-  if (error || !shipment) {
-
-    result.innerHTML =
-      '<p class="error">Shipment not found.</p>';
-
-    return;
-  }
-
-
-  let html = `
-    <div class="shipment-info">
-
-      <h3>Shipment Found</h3>
-
-      <p>
-        <strong>Tracking Number:</strong>
-        ${shipment.tracking_number || "N/A"}
-      </p>
-
-      <p>
-        <strong>Status:</strong>
-        ${shipment.status || "N/A"}
-      </p>
-
-    </div>
-  `;
-
-
-  const { data: events } = await supabaseClient
-    .from("shipment_events")
-    .select("*")
-    .eq("shipment_id", shipment.id)
-    .order("created_at", { ascending: false });
-
-
-  if (events && events.length > 0) {
-
-    html += "<h3>Tracking History</h3>";
-
-
-    events.forEach(event => {
-
-      html += `
-        <div class="event">
-
-          <strong>${event.status || "Update"}</strong>
-
-          <br>
-
-          ${event.location || ""}
-
-          <br>
-
-          <small>
-            ${event.created_at
-              ? new Date(event.created_at).toLocaleString()
-              : ""}
-          </small>
-
-        </div>
-      `;
-
-    });
-
-  } else {
-
-    html += "<p>No tracking events available yet.</p>";
-
-  }
-
-
-  result.innerHTML = html;
-
-}
-
-
-document
-  .getElementById("trackingNumber")
-  .addEventListener("keypress", function(event) {
-
-    if (event.key === "Enter") {
-
-      trackShipment();
 
     }
 
-  });
 
-</script>
+    // Allow Enter key to search
+    document
+      .getElementById("trackingNumber")
+      .addEventListener("keypress", function(event) {
+
+        if (event.key === "Enter") {
+          trackShipment();
+        }
+
+      });
+
+  </script>
 
 </body>
 </html>
