@@ -224,32 +224,137 @@ async function trackShipment() {
 
         });
 
-      } else {
+      <script>
 
-        html +=
-          "<p>No tracking events available yet.</p>";
+const SUPABASE_URL = "https://dgwncijvafhbsgakmiqo.supabase.co";
 
-      }
+const SUPABASE_KEY = "sb_publishable_dyltRd6ccwZ9CvNVpwjCXw_GbmBkpiB";
+
+const supabaseClient = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
 
-      result.innerHTML = html;
+async function trackShipment() {
+
+  const trackingNumber = document
+    .getElementById("trackingNumber")
+    .value
+    .trim();
+
+  const result = document.getElementById("result");
+
+  result.innerHTML = "";
+
+  if (!trackingNumber) {
+
+    result.innerHTML =
+      '<p class="error">Please enter a tracking number.</p>';
+
+    return;
+  }
+
+
+  result.innerHTML = "<p>Searching for your shipment...</p>";
+
+
+  const { data: shipment, error } = await supabaseClient
+    .from("shipments")
+    .select("*")
+    .eq("tracking_number", trackingNumber)
+    .single();
+
+
+  if (error || !shipment) {
+
+    result.innerHTML =
+      '<p class="error">Shipment not found.</p>';
+
+    return;
+  }
+
+
+  let html = `
+    <div class="shipment-info">
+
+      <h3>Shipment Found</h3>
+
+      <p>
+        <strong>Tracking Number:</strong>
+        ${shipment.tracking_number || "N/A"}
+      </p>
+
+      <p>
+        <strong>Status:</strong>
+        ${shipment.status || "N/A"}
+      </p>
+
+    </div>
+  `;
+
+
+  const { data: events } = await supabaseClient
+    .from("shipment_events")
+    .select("*")
+    .eq("shipment_id", shipment.id)
+    .order("created_at", { ascending: false });
+
+
+  if (events && events.length > 0) {
+
+    html += "<h3>Tracking History</h3>";
+
+
+    events.forEach(event => {
+
+      html += `
+        <div class="event">
+
+          <strong>${event.status || "Update"}</strong>
+
+          <br>
+
+          ${event.location || ""}
+
+          <br>
+
+          <small>
+            ${event.created_at
+              ? new Date(event.created_at).toLocaleString()
+              : ""}
+          </small>
+
+        </div>
+      `;
+
+    });
+
+  } else {
+
+    html += "<p>No tracking events available yet.</p>";
+
+  }
+
+
+  result.innerHTML = html;
+
+}
+
+
+document
+  .getElementById("trackingNumber")
+  .addEventListener("keypress", function(event) {
+
+    if (event.key === "Enter") {
+
+      trackShipment();
 
     }
 
+  });
 
-    document
-      .getElementById("trackingNumber")
-      .addEventListener("keypress", function(event) {
-
-        if (event.key === "Enter") {
-
-          trackShipment();
-
-        }
-
-      });
-
-  </script>
+</script>
 
 </body>
 </html>
