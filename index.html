@@ -1,26 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Shipment Tracking</title>
+  <title>GLOBALTRACK | Shipment Tracking</title>
 
-  <!-- Supabase -->
+
+  <!-- SUPABASE -->
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- Font Awesome Icons -->
+
+  <!-- FONT AWESOME -->
+
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
   >
 
-  <!-- Google Font -->
+
+  <!-- GOOGLE FONT -->
+
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet"
   >
+
 
   <style>
 
@@ -30,28 +39,39 @@
       box-sizing: border-box;
     }
 
+
     html {
       scroll-behavior: smooth;
     }
 
+
     body {
+
       font-family: "Poppins", sans-serif;
+
       background: #f4f8fc;
+
       color: #102a43;
+
       overflow-x: hidden;
+
     }
 
 
-    /* ==============================
+    /* =========================
        NAVIGATION
-    ============================== */
+    ========================= */
 
     nav {
+
       width: 100%;
+
       min-height: 75px;
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
 
       padding: 15px 8%;
@@ -65,57 +85,78 @@
 
       color: white;
 
-      position: relative;
-      z-index: 100;
-
       box-shadow:
         0 4px 20px rgba(0,0,0,0.2);
+
+      position: relative;
+
+      z-index: 100;
+
     }
 
 
     .logo {
+
       font-size: 24px;
+
       font-weight: 800;
+
       letter-spacing: 1px;
+
     }
 
 
     .logo i {
+
       color: #f5b800;
+
       margin-right: 8px;
+
     }
 
 
     .logo span {
+
       color: #f5b800;
+
     }
 
 
     nav ul {
+
       display: flex;
+
       list-style: none;
+
       gap: 30px;
+
     }
 
 
     nav ul li a {
+
       color: white;
+
       text-decoration: none;
+
       font-size: 14px;
+
       font-weight: 500;
-      transition: 0.3s;
+
     }
 
 
     nav ul li a:hover {
+
       color: #f5b800;
+
     }
 
 
 
-    /* ==============================
-       HERO SECTION
-    ============================== */
+    /* =========================
+       HERO
+    ========================= */
 
     .hero {
 
@@ -126,13 +167,14 @@
       overflow: hidden;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
       text-align: center;
 
       padding: 80px 20px 130px;
-
 
       background:
 
@@ -158,9 +200,6 @@
     }
 
 
-
-    /* TECHNOLOGY GRID */
-
     .hero::before {
 
       content: "";
@@ -168,11 +207,12 @@
       position: absolute;
 
       width: 100%;
+
       height: 100%;
 
       top: 0;
-      left: 0;
 
+      left: 0;
 
       background-image:
 
@@ -187,12 +227,9 @@
           transparent 1px
         );
 
-
       background-size: 50px 50px;
 
-
-      animation:
-        gridMove 12s linear infinite;
+      animation: gridMove 12s linear infinite;
 
     }
 
@@ -208,7 +245,6 @@
       }
 
     }
-
 
 
     .hero-content {
@@ -234,9 +270,6 @@
 
       margin-bottom: 20px;
 
-      text-shadow:
-        0 5px 20px rgba(0,0,0,0.2);
-
     }
 
 
@@ -255,19 +288,17 @@
 
       max-width: 700px;
 
-      margin:
-        0 auto 35px;
+      margin: 0 auto 35px;
 
-      color:
-        rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.9);
 
     }
 
 
 
-    /* ==============================
+    /* =========================
        AIRPLANE
-    ============================== */
+    ========================= */
 
     .airplane {
 
@@ -285,8 +316,7 @@
 
       z-index: 2;
 
-      animation:
-        fly 18s linear infinite;
+      animation: fly 18s linear infinite;
 
     }
 
@@ -327,9 +357,9 @@
 
 
 
-    /* ==============================
+    /* =========================
        CLOUDS
-    ============================== */
+    ========================= */
 
     .cloud {
 
@@ -350,8 +380,7 @@
 
       left: 5%;
 
-      animation:
-        cloudMove 15s ease-in-out infinite;
+      animation: cloudMove 15s ease-in-out infinite;
 
     }
 
@@ -362,8 +391,7 @@
 
       right: 8%;
 
-      animation:
-        cloudMove 20s ease-in-out infinite reverse;
+      animation: cloudMove 20s ease-in-out infinite reverse;
 
     }
 
@@ -386,14 +414,13 @@
 
 
 
-    /* ==============================
+    /* =========================
        TRACKING BOX
-    ============================== */
+    ========================= */
 
     .tracking-box {
 
-      background:
-        rgba(255,255,255,0.97);
+      background: rgba(255,255,255,0.97);
 
       padding: 35px;
 
@@ -442,7 +469,6 @@
     }
 
 
-
     .tracking-form {
 
       display: flex;
@@ -460,8 +486,7 @@
 
       border-radius: 12px;
 
-      border:
-        1px solid #d4e0eb;
+      border: 1px solid #d4e0eb;
 
       font-size: 16px;
 
@@ -479,16 +504,14 @@
       border-color: #0a7cc2;
 
       box-shadow:
-        0 0 0 4px
-        rgba(10,124,194,0.12);
+        0 0 0 4px rgba(10,124,194,0.12);
 
     }
 
 
     .tracking-form button {
 
-      padding:
-        18px 30px;
+      padding: 18px 30px;
 
       border: none;
 
@@ -511,19 +534,15 @@
 
       cursor: pointer;
 
-      transition: 0.3s;
-
     }
 
 
     .tracking-form button:hover {
 
-      transform:
-        translateY(-3px);
+      transform: translateY(-3px);
 
       box-shadow:
-        0 12px 25px
-        rgba(10,124,194,0.35);
+        0 12px 25px rgba(10,124,194,0.35);
 
     }
 
@@ -534,15 +553,13 @@
 
       cursor: not-allowed;
 
-      transform: none;
-
     }
 
 
 
-    /* ==============================
+    /* =========================
        ROAD
-    ============================== */
+    ========================= */
 
     .road {
 
@@ -554,8 +571,7 @@
 
       height: 100px;
 
-      background:
-        #14212c;
+      background: #14212c;
 
       z-index: 5;
 
@@ -578,19 +594,13 @@
 
         repeating-linear-gradient(
           90deg,
-
           white 0,
-
           white 50px,
-
           transparent 50px,
-
           transparent 100px
         );
 
-
-      animation:
-        roadMove 2s linear infinite;
+      animation: roadMove 2s linear infinite;
 
     }
 
@@ -608,11 +618,6 @@
     }
 
 
-
-    /* ==============================
-       TRUCK
-    ============================== */
-
     .truck {
 
       position: absolute;
@@ -627,8 +632,7 @@
 
       z-index: 10;
 
-      animation:
-        truckDrive 15s linear infinite;
+      animation: truckDrive 15s linear infinite;
 
     }
 
@@ -646,11 +650,6 @@
     }
 
 
-
-    /* ==============================
-       CAR
-    ============================== */
-
     .car {
 
       position: absolute;
@@ -665,8 +664,7 @@
 
       z-index: 10;
 
-      animation:
-        carDrive 12s linear infinite;
+      animation: carDrive 12s linear infinite;
 
     }
 
@@ -685,9 +683,9 @@
 
 
 
-    /* ==============================
-       RESULT AREA
-    ============================== */
+    /* =========================
+       RESULT
+    ========================= */
 
     #result {
 
@@ -695,8 +693,7 @@
 
       margin: 50px auto;
 
-      padding:
-        0 20px;
+      padding: 0 20px;
 
     }
 
@@ -710,11 +707,9 @@
       padding: 35px;
 
       box-shadow:
-        0 15px 45px
-        rgba(0,0,0,0.12);
+        0 15px 45px rgba(0,0,0,0.12);
 
-      border-left:
-        6px solid #f5b800;
+      border-left: 6px solid #f5b800;
 
     }
 
@@ -726,7 +721,6 @@
       margin-bottom: 25px;
 
     }
-
 
 
     .shipment-grid {
@@ -749,8 +743,7 @@
 
       border-radius: 12px;
 
-      border:
-        1px solid #e2edf7;
+      border: 1px solid #e2edf7;
 
     }
 
@@ -766,7 +759,6 @@
       margin-bottom: 7px;
 
     }
-
 
 
     .status {
@@ -785,16 +777,15 @@
 
       color: #07559a;
 
-      border:
-        1px solid #b9e0f7;
+      border: 1px solid #b9e0f7;
 
     }
 
 
 
-    /* ==============================
+    /* =========================
        SERVICES
-    ============================== */
+    ========================= */
 
     .services {
 
@@ -854,8 +845,7 @@
 
       background: #f7fbff;
 
-      border:
-        1px solid #e2edf7;
+      border: 1px solid #e2edf7;
 
       transition: 0.3s;
 
@@ -864,15 +854,12 @@
 
     .service-card:hover {
 
-      transform:
-        translateY(-10px);
+      transform: translateY(-10px);
 
       box-shadow:
-        0 18px 40px
-        rgba(0,80,150,0.15);
+        0 18px 40px rgba(0,80,150,0.15);
 
-      border-color:
-        #f5b800;
+      border-color: #f5b800;
 
     }
 
@@ -909,9 +896,9 @@
 
 
 
-    /* ==============================
+    /* =========================
        FOOTER
-    ============================== */
+    ========================= */
 
     footer {
 
@@ -936,16 +923,15 @@
 
 
 
-    /* ==============================
-       MOBILE DESIGN
-    ============================== */
+    /* =========================
+       MOBILE
+    ========================= */
 
     @media (max-width: 768px) {
 
       nav {
 
-        padding:
-          15px 20px;
+        padding: 15px 20px;
 
       }
 
@@ -968,8 +954,7 @@
 
         min-height: 680px;
 
-        padding:
-          70px 18px 130px;
+        padding: 70px 18px 130px;
 
       }
 
@@ -991,13 +976,6 @@
       .tracking-box {
 
         padding: 28px 20px;
-
-      }
-
-
-      .tracking-box h2 {
-
-        font-size: 24px;
 
       }
 
@@ -1053,543 +1031,421 @@
 <body>
 
 
-<!-- =========================
-     NAVIGATION
-========================= -->
+  <!-- NAVIGATION -->
 
-<nav>
+  <nav>
 
-  <div class="logo">
+    <div class="logo">
 
-    <i class="fa-solid fa-plane-departure"></i>
+      <i class="fa-solid fa-plane-departure"></i>
 
-    GLOBAL<span>TRACK</span>
+      GLOBAL<span>TRACK</span>
 
-  </div>
+    </div>
 
 
-  <ul>
+    <ul>
 
-    <li>
-      <a href="#home">
-        Home
-      </a>
-    </li>
+      <li>
+        <a href="#home">Home</a>
+      </li>
 
-    <li>
-      <a href="#services">
-        Services
-      </a>
-    </li>
+      <li>
+        <a href="#services">Services</a>
+      </li>
 
-    <li>
-      <a href="#tracking">
-        Track Shipment
-      </a>
-    </li>
+      <li>
+        <a href="#tracking">Track Shipment</a>
+      </li>
 
-  </ul>
+    </ul>
 
-</nav>
+  </nav>
 
 
 
-<!-- =========================
-     HERO SECTION
-========================= -->
+  <!-- HERO -->
 
-<section
-  class="hero"
-  id="home"
->
+  <section class="hero" id="home">
 
 
-  <!-- AIRPLANE -->
+    <div class="airplane">
 
-  <div class="airplane">
+      <i class="fa-solid fa-plane"></i>
 
-    <i class="fa-solid fa-plane"></i>
-
-  </div>
+    </div>
 
 
+    <div class="cloud cloud1">
 
-  <!-- CLOUDS -->
+      <i class="fa-solid fa-cloud"></i>
 
-  <div class="cloud cloud1">
-
-    <i class="fa-solid fa-cloud"></i>
-
-  </div>
+    </div>
 
 
-  <div class="cloud cloud2">
+    <div class="cloud cloud2">
 
-    <i class="fa-solid fa-cloud"></i>
+      <i class="fa-solid fa-cloud"></i>
 
-  </div>
+    </div>
 
 
 
-  <!-- MAIN CONTENT -->
-
-  <div class="hero-content">
+    <div class="hero-content">
 
 
-    <h1>
+      <h1>
 
-      Track Your Shipment
+        Track Your Shipment
+
+        <span>
+          Anywhere in the World
+        </span>
+
+      </h1>
+
+
+      <p>
+
+        Fast, secure and reliable international shipment tracking.
+        Enter your tracking number below to see the latest
+        information about your package.
+
+      </p>
+
+
+
+      <!-- TRACKING BOX -->
+
+      <div class="tracking-box" id="tracking">
+
+
+        <h2>
+
+          <i class="fa-solid fa-location-dot"></i>
+
+          Track Your Shipment
+
+        </h2>
+
+
+        <p class="tracking-description">
+
+          Enter your unique tracking number below to view your
+          shipment information.
+
+        </p>
+
+
+        <div class="tracking-form">
+
+
+          <input
+            type="text"
+            id="trackingNumber"
+            placeholder="Example: TRK-C783202A3A00"
+            autocomplete="off"
+          >
+
+
+          <button
+            id="trackButton"
+            onclick="trackShipment()"
+          >
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            Track Shipment
+
+          </button>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+
+    <!-- ROAD -->
+
+    <div class="road"></div>
+
+
+    <!-- TRUCK -->
+
+    <div class="truck">
+
+      <i class="fa-solid fa-truck"></i>
+
+    </div>
+
+
+    <!-- CAR -->
+
+    <div class="car">
+
+      <i class="fa-solid fa-car"></i>
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- RESULT -->
+
+  <div id="result"></div>
+
+
+
+  <!-- SERVICES -->
+
+  <section class="services" id="services">
+
+
+    <h2 class="section-title">
+
+      Our
 
       <span>
-        Anywhere in the World
+        Logistics Services
       </span>
 
-    </h1>
+    </h2>
 
 
+    <p class="section-text">
 
-    <p>
-
-      Fast, secure and reliable international shipment tracking.
-      Enter your tracking number below to see the latest
-      information about your package.
+      Connecting people, packages and businesses around the world.
 
     </p>
 
 
 
-    <!-- TRACKING BOX -->
+    <div class="service-grid">
 
-    <div
-      class="tracking-box"
-      id="tracking"
-    >
 
+      <div class="service-card">
 
-      <h2>
+        <i class="fa-solid fa-plane"></i>
 
-        <i class="fa-solid fa-location-dot"></i>
-
-        Track Your Shipment
-
-      </h2>
-
-
-
-      <p class="tracking-description">
-
-        Enter your unique tracking number below to view your
-        shipment information.
-
-      </p>
-
-
-
-      <div class="tracking-form">
-
-
-        <input
-          type="text"
-          id="trackingNumber"
-          placeholder="Example: TRK-C783202A3A00"
-          autocomplete="off"
-        >
-
-
-
-        <button
-          id="trackButton"
-          onclick="trackShipment()"
-        >
-
-          <i class="fa-solid fa-magnifying-glass"></i>
-
-          Track Shipment
-
-        </button>
-
-
-      </div>
-
-
-    </div>
-
-
-  </div>
-
-
-
-  <!-- ROAD -->
-
-  <div class="road"></div>
-
-
-
-  <!-- TRUCK -->
-
-  <div class="truck">
-
-    <i class="fa-solid fa-truck"></i>
-
-  </div>
-
-
-
-  <!-- CAR -->
-
-  <div class="car">
-
-    <i class="fa-solid fa-car"></i>
-
-  </div>
-
-
-</section>
-
-
-
-<!-- =========================
-     TRACKING RESULT
-========================= -->
-
-<div id="result"></div>
-
-
-
-<!-- =========================
-     SERVICES
-========================= -->
-
-<section
-  class="services"
-  id="services"
->
-
-
-  <h2 class="section-title">
-
-    Our
-    <span>
-      Logistics Services
-    </span>
-
-  </h2>
-
-
-
-  <p class="section-text">
-
-    Connecting people, packages and businesses around the world.
-
-  </p>
-
-
-
-  <div class="service-grid">
-
-
-    <!-- AIR FREIGHT -->
-
-    <div class="service-card">
-
-      <i class="fa-solid fa-plane"></i>
-
-      <h3>
-        Air Freight
-      </h3>
-
-      <p>
-
-        Fast and reliable international air transportation.
-
-      </p>
-
-    </div>
-
-
-
-    <!-- ROAD DELIVERY -->
-
-    <div class="service-card">
-
-      <i class="fa-solid fa-truck"></i>
-
-      <h3>
-        Road Delivery
-      </h3>
-
-      <p>
-
-        Secure transportation and delivery by road.
-
-      </p>
-
-    </div>
-
-
-
-    <!-- SEA FREIGHT -->
-
-    <div class="service-card">
-
-      <i class="fa-solid fa-ship"></i>
-
-      <h3>
-        Sea Freight
-      </h3>
-
-      <p>
-
-        Reliable cargo transportation across international waters.
-
-      </p>
-
-    </div>
-
-
-
-    <!-- PACKAGE TRACKING -->
-
-    <div class="service-card">
-
-      <i class="fa-solid fa-box"></i>
-
-      <h3>
-        Package Tracking
-      </h3>
-
-      <p>
-
-        Monitor your shipment from pickup to final delivery.
-
-      </p>
-
-    </div>
-
-
-  </div>
-
-
-</section>
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-  <p>
-
-    © 2026
-
-    <span>
-      GLOBALTRACK
-    </span>
-
-    |
-
-    Fast • Secure • Reliable
-
-  </p>
-
-</footer>
-
-
-
-<!-- =========================
-     SUPABASE + JAVASCRIPT
-========================= -->
-
-<script>
-
-
-/* ==============================
-   SUPABASE CONFIGURATION
-============================== */
-
-
-const SUPABASE_URL =
-  "https://dgwncijvfhbsgakmiqo.supabase.co";
-
-
-const SUPABASE_ANON_KEY =
-  "sb_publishable_dyltRd6ccwZ9CvNVpwjCXw_GbmBkpiB";
-
-
-const supabaseClient =
-  supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-  );
-
-
-
-/* ==============================
-   SAFE TEXT FUNCTION
-============================== */
-
-function escapeHTML(value) {
-
-  if (
-    value === null ||
-    value === undefined
-  ) {
-
-    return "N/A";
-
-  }
-
-
-  const div =
-    document.createElement("div");
-
-
-  div.textContent =
-    String(value);
-
-
-  return div.innerHTML;
-
-}
-
-
-
-/* ==============================
-   TRACK SHIPMENT
-============================== */
-
-async function trackShipment() {
-
-
-  const trackingNumber =
-    document
-      .getElementById("trackingNumber")
-      .value
-      .trim();
-
-
-  const result =
-    document.getElementById("result");
-
-
-  const trackButton =
-    document.getElementById("trackButton");
-
-
-
-  /* CHECK EMPTY INPUT */
-
-
-  if (!trackingNumber) {
-
-
-    result.innerHTML = `
-
-      <div class="result-card">
-
-        <h2>
-          ⚠️ Tracking Number Required
-        </h2>
+        <h3>Air Freight</h3>
 
         <p>
-
-          Please enter your tracking number and try again.
-
+          Fast and reliable international air transportation.
         </p>
 
       </div>
 
-    `;
 
 
-    result.scrollIntoView({
-      behavior: "smooth"
-    });
+      <div class="service-card">
+
+        <i class="fa-solid fa-truck"></i>
+
+        <h3>Road Delivery</h3>
+
+        <p>
+          Secure transportation and delivery by road.
+        </p>
+
+      </div>
 
 
-    return;
 
-  }
+      <div class="service-card">
 
+        <i class="fa-solid fa-ship"></i>
 
+        <h3>Sea Freight</h3>
 
-  /* SHOW LOADING */
+        <p>
+          Reliable cargo transportation across international waters.
+        </p>
 
-
-  trackButton.disabled = true;
-
-
-  trackButton.innerHTML = `
-
-    <i class="fa-solid fa-spinner fa-spin"></i>
-
-    Searching...
-
-  `;
+      </div>
 
 
-  result.innerHTML = `
 
-    <div class="result-card">
+      <div class="service-card">
 
-      <h2>
+        <i class="fa-solid fa-box"></i>
+
+        <h3>Package Tracking</h3>
+
+        <p>
+          Monitor your shipment from pickup to final delivery.
+        </p>
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <p>
+
+      © 2026
+
+      <span>
+        GLOBALTRACK
+      </span>
+
+      |
+
+      Fast • Secure • Reliable
+
+    </p>
+
+  </footer>
+
+
+
+  <!-- =========================
+       JAVASCRIPT + SUPABASE
+  ========================= -->
+
+  <script>
+
+
+    /* =========================
+       SUPABASE CONFIGURATION
+    ========================= */
+
+
+    const SUPABASE_URL =
+      "https://dgwncijvfhbsgakmiqo.supabase.co";
+
+
+    const SUPABASE_ANON_KEY =
+      "sb_publishable_dyltRd6ccwZ9CvNVpwjCXw_GbmBkpiB";
+
+
+    const supabaseClient =
+      supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      );
+
+
+
+    /* =========================
+       SAFE TEXT
+    ========================= */
+
+
+    function escapeHTML(value) {
+
+
+      if (
+        value === null ||
+        value === undefined
+      ) {
+
+        return "N/A";
+
+      }
+
+
+      const div =
+        document.createElement("div");
+
+
+      div.textContent =
+        String(value);
+
+
+      return div.innerHTML;
+
+
+    }
+
+
+
+    /* =========================
+       TRACK SHIPMENT
+    ========================= */
+
+
+    async function trackShipment() {
+
+
+      const trackingNumber =
+        document
+          .getElementById("trackingNumber")
+          .value
+          .trim();
+
+
+      const result =
+        document.getElementById("result");
+
+
+      const trackButton =
+        document.getElementById("trackButton");
+
+
+
+      /* EMPTY TRACKING NUMBER */
+
+
+      if (!trackingNumber) {
+
+
+        result.innerHTML = `
+
+          <div class="result-card">
+
+            <h2>
+              ⚠️ Tracking Number Required
+            </h2>
+
+            <p>
+              Please enter your tracking number and try again.
+            </p>
+
+          </div>
+
+        `;
+
+
+        result.scrollIntoView({
+          behavior: "smooth"
+        });
+
+
+        return;
+
+      }
+
+
+
+      /* LOADING */
+
+
+      trackButton.disabled = true;
+
+
+      trackButton.innerHTML = `
 
         <i class="fa-solid fa-spinner fa-spin"></i>
 
-        Searching for your shipment...
+        Searching...
 
-      </h2>
-
-      <p>
-
-        Please wait while we check your tracking number.
-
-      </p>
-
-    </div>
-
-  `;
-
-
-  result.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-
-
-
-  try {
-
-
-    /* SEARCH SUPABASE */
-
-
-    const {
-      data,
-      error
-    } = await supabaseClient
-
-      .from("shipments")
-
-      .select("*")
-
-      .eq(
-        "tracking_number",
-        trackingNumber
-      )
-
-      .maybeSingle();
-
-
-
-    /* ERROR OR NOT FOUND */
-
-
-    if (error) {
-
-      console.error(error);
+      `;
 
 
       result.innerHTML = `
@@ -1597,13 +1453,15 @@ async function trackShipment() {
         <div class="result-card">
 
           <h2>
-            ❌ Unable to Check Shipment
+
+            <i class="fa-solid fa-spinner fa-spin"></i>
+
+            Searching for your shipment...
+
           </h2>
 
           <p>
-
-            There was a problem connecting to the shipment database.
-
+            Please wait while we check your tracking number.
           </p>
 
         </div>
@@ -1611,271 +1469,386 @@ async function trackShipment() {
       `;
 
 
-      return;
-
-    }
-
-
-
-    if (!data) {
-
-
-      result.innerHTML = `
-
-        <div class="result-card">
-
-          <h2>
-            ❌ Shipment Not Found
-          </h2>
-
-
-          <p>
-
-            We could not find a shipment with tracking number:
-
-            <strong>
-              ${escapeHTML(trackingNumber)}
-            </strong>
-
-          </p>
-
-
-          <br>
-
-
-          <p>
-
-            Please check the tracking number and try again.
-
-          </p>
-
-        </div>
-
-      `;
-
-
-      return;
-
-    }
+      result.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
 
 
 
-    /* DISPLAY SHIPMENT */
+      try {
 
 
-    result.innerHTML = `
-
-      <div class="result-card">
-
-
-        <h2>
-
-          <i class="fa-solid fa-box-open"></i>
-
-          Shipment Information
-
-        </h2>
+        /* =========================
+           SEARCH SUPABASE
+        ========================= */
 
 
+        const {
+          data,
+          error
+        } = await supabaseClient
 
-        <div class="shipment-grid">
+          .from("shipments")
+
+          .select("*")
+
+          .eq(
+            "tracking_number",
+            trackingNumber
+          )
+
+          .maybeSingle();
 
 
-          <div class="shipment-item">
 
-            <strong>
-              Tracking Number
-            </strong>
+        /* =========================
+           SHOW EXACT ERROR
+        ========================= */
 
-            ${escapeHTML(data.tracking_number)}
+
+        if (error) {
+
+
+          console.error(
+            "SUPABASE ERROR:",
+            error
+          );
+
+
+          result.innerHTML = `
+
+            <div class="result-card">
+
+              <h2>
+                ❌ Database Error
+              </h2>
+
+
+              <p>
+
+                <strong>
+                  Message:
+                </strong>
+
+                ${escapeHTML(error.message)}
+
+              </p>
+
+
+              <br>
+
+
+              <p>
+
+                <strong>
+                  Error Code:
+                </strong>
+
+                ${escapeHTML(error.code || "No code")}
+
+              </p>
+
+
+              <br>
+
+
+              <p>
+
+                <strong>
+                  Details:
+                </strong>
+
+                ${escapeHTML(error.details || "No additional details")}
+
+              </p>
+
+
+            </div>
+
+          `;
+
+
+          return;
+
+        }
+
+
+
+        /* =========================
+           SHIPMENT NOT FOUND
+        ========================= */
+
+
+        if (!data) {
+
+
+          result.innerHTML = `
+
+            <div class="result-card">
+
+              <h2>
+                ❌ Shipment Not Found
+              </h2>
+
+
+              <p>
+
+                We could not find a shipment with this
+                tracking number:
+
+                <strong>
+                  ${escapeHTML(trackingNumber)}
+                </strong>
+
+              </p>
+
+
+              <br>
+
+
+              <p>
+
+                Please check the tracking number and try again.
+
+              </p>
+
+
+            </div>
+
+          `;
+
+
+          return;
+
+        }
+
+
+
+        /* =========================
+           DISPLAY SHIPMENT
+        ========================= */
+
+
+        result.innerHTML = `
+
+          <div class="result-card">
+
+
+            <h2>
+
+              <i class="fa-solid fa-box-open"></i>
+
+              Shipment Information
+
+            </h2>
+
+
+
+            <div class="shipment-grid">
+
+
+              <div class="shipment-item">
+
+                <strong>
+                  Tracking Number
+                </strong>
+
+                ${escapeHTML(data.tracking_number)}
+
+              </div>
+
+
+
+              <div class="shipment-item">
+
+                <strong>
+                  Shipment Status
+                </strong>
+
+                ${escapeHTML(
+                  data.status || "Processing"
+                )}
+
+              </div>
+
+
+
+              <div class="shipment-item">
+
+                <strong>
+                  Sender
+                </strong>
+
+                ${escapeHTML(
+                  data.sender_name
+                )}
+
+              </div>
+
+
+
+              <div class="shipment-item">
+
+                <strong>
+                  Receiver
+                </strong>
+
+                ${escapeHTML(
+                  data.receiver_name
+                )}
+
+              </div>
+
+
+
+              <div class="shipment-item">
+
+                <strong>
+                  Origin
+                </strong>
+
+                ${escapeHTML(
+                  data.origin
+                )}
+
+              </div>
+
+
+
+              <div class="shipment-item">
+
+                <strong>
+                  Destination
+                </strong>
+
+                ${escapeHTML(
+                  data.destination
+                )}
+
+              </div>
+
+
+
+              <div class="shipment-item">
+
+                <strong>
+                  Current Location
+                </strong>
+
+                ${escapeHTML(
+                  data.current_location
+                )}
+
+              </div>
+
+
+            </div>
+
+
+
+            <div class="status">
+
+              <i class="fa-solid fa-truck-fast"></i>
+
+              Current Status:
+
+              ${escapeHTML(
+                data.status || "Processing"
+              )}
+
+            </div>
+
 
           </div>
 
-
-
-          <div class="shipment-item">
-
-            <strong>
-              Shipment Status
-            </strong>
-
-            ${escapeHTML(
-              data.status || "Processing"
-            )}
-
-          </div>
-
-
-
-          <div class="shipment-item">
-
-            <strong>
-              Sender
-            </strong>
-
-            ${escapeHTML(
-              data.sender_name
-            )}
-
-          </div>
-
-
-
-          <div class="shipment-item">
-
-            <strong>
-              Receiver
-            </strong>
-
-            ${escapeHTML(
-              data.receiver_name
-            )}
-
-          </div>
-
-
-
-          <div class="shipment-item">
-
-            <strong>
-              Origin
-            </strong>
-
-            ${escapeHTML(
-              data.origin
-            )}
-
-          </div>
-
-
-
-          <div class="shipment-item">
-
-            <strong>
-              Destination
-            </strong>
-
-            ${escapeHTML(
-              data.destination
-            )}
-
-          </div>
-
-
-
-          <div class="shipment-item">
-
-            <strong>
-              Current Location
-            </strong>
-
-            ${escapeHTML(
-              data.current_location
-            )}
-
-          </div>
-
-
-        </div>
-
-
-
-        <div class="status">
-
-          <i class="fa-solid fa-truck-fast"></i>
-
-          Current Status:
-
-          ${escapeHTML(
-            data.status || "Processing"
-          )}
-
-        </div>
-
-
-      </div>
-
-    `;
-
-
-  }
-
-
-  catch (error) {
-
-
-    console.error(error);
-
-
-    result.innerHTML = `
-
-      <div class="result-card">
-
-        <h2>
-          ❌ Something Went Wrong
-        </h2>
-
-        <p>
-
-          Please try again later.
-
-        </p>
-
-      </div>
-
-    `;
-
-  }
-
-
-  finally {
-
-
-    trackButton.disabled = false;
-
-
-    trackButton.innerHTML = `
-
-      <i class="fa-solid fa-magnifying-glass"></i>
-
-      Track Shipment
-
-    `;
-
-  }
-
-
-}
-
-
-
-/* ==============================
-   PRESS ENTER TO TRACK
-============================== */
-
-
-document
-  .getElementById("trackingNumber")
-  .addEventListener(
-    "keydown",
-    function(event) {
-
-
-      if (event.key === "Enter") {
-
-
-        trackShipment();
+        `;
 
 
       }
 
 
+      catch (error) {
+
+
+        console.error(
+          "UNEXPECTED ERROR:",
+          error
+        );
+
+
+        result.innerHTML = `
+
+          <div class="result-card">
+
+            <h2>
+              ❌ Unexpected Error
+            </h2>
+
+
+            <p>
+
+              ${escapeHTML(error.message)}
+
+            </p>
+
+
+          </div>
+
+        `;
+
+      }
+
+
+      finally {
+
+
+        trackButton.disabled = false;
+
+
+        trackButton.innerHTML = `
+
+          <i class="fa-solid fa-magnifying-glass"></i>
+
+          Track Shipment
+
+        `;
+
+      }
+
+
     }
-  );
 
 
-</script>
+
+    /* =========================
+       PRESS ENTER TO TRACK
+    ========================= */
+
+
+    document
+      .getElementById("trackingNumber")
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+
+          if (event.key === "Enter") {
+
+
+            trackShipment();
+
+
+          }
+
+
+        }
+      );
+
+
+  </script>
 
 
 </body>
+
 </html>
