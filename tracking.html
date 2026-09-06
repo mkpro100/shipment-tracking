@@ -1,1 +1,262 @@
->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Shipment Tracking</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #172033;
+    }
+
+    header {
+      background: #172033;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    input {
+      flex: 1;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 14px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 25px;
+    }
+
+    .shipment-info {
+      background: #f8fafc;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+    .event {
+      border-left: 4px solid #2563eb;
+      padding: 10px 15px;
+      margin: 12px 0;
+      background: #f8fafc;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Shipment Tracking</h1>
+  </header>
+
+  <div class="container">
+    <div class="card">
+
+      <h2>Track Your Shipment</h2>
+
+      <div class="search-box">
+        <input
+          type="text"
+          id="trackingNumber"
+          placeholder="Enter your tracking number"
+        >
+
+        <button onclick="trackShipment()">
+          Track
+        </button>
+      </div>
+
+      <div id="result"></div>
+
+    </div>
+  </div>
+
+
+  <script>
+
+    const SUPABASE_URL = "YOUR_SUPABASE_URL";
+
+    const SUPABASE_KEY = "YOUR_PUBLISHABLE_KEY";
+
+    const supabaseClient = supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+    async function trackShipment() {
+
+      const trackingNumber =
+        document.getElementById("trackingNumber").value.trim();
+
+      const result =
+        document.getElementById("result");
+
+      result.innerHTML = "";
+
+      if (!trackingNumber) {
+
+        result.innerHTML =
+          '<p class="error">Please enter a tracking number.</p>';
+
+        return;
+      }
+
+
+      result.innerHTML =
+        "<p>Searching for your shipment...</p>";
+
+
+      const { data: shipment, error } =
+        await supabaseClient
+          .from("shipments")
+          .select("*")
+          .eq("tracking_number", trackingNumber)
+          .single();
+
+
+      if (error || !shipment) {
+
+        result.innerHTML =
+          '<p class="error">Shipment not found.</p>';
+
+        return;
+      }
+
+
+      let html = `
+
+        <div class="shipment-info">
+
+          <h3>Shipment Found</h3>
+
+          <p><strong>Tracking Number:</strong>
+          ${shipment.tracking_number || "N/A"}</p>
+
+          <p><strong>Status:</strong>
+          ${shipment.status || "N/A"}</p>
+
+        </div>
+
+      `;
+
+
+      const { data: events } =
+        await supabaseClient
+          .from("shipment_events")
+          .select("*")
+          .eq("shipment_id", shipment.id)
+          .order("created_at", { ascending: false });
+
+
+      if (events && events.length > 0) {
+
+        html += "<h3>Tracking History</h3>";
+
+        events.forEach(event => {
+
+          html += `
+
+            <div class="event">
+
+              <strong>${event.status || "Update"}</strong>
+
+              <br>
+
+              ${event.location || ""}
+
+              <br>
+
+              <small>
+                ${event.created_at
+                  ? new Date(event.created_at).toLocaleString()
+                  : ""}
+              </small>
+
+            </div>
+
+          `;
+
+        });
+
+      } else {
+
+        html +=
+          "<p>No tracking events available yet.</p>";
+
+      }
+
+
+      result.innerHTML = html;
+
+    }
+
+
+    document
+      .getElementById("trackingNumber")
+      .addEventListener("keypress", function(event) {
+
+        if (event.key === "Enter") {
+
+          trackShipment();
+
+        }
+
+      });
+
+  </script>
+
+</body>
+</html>
